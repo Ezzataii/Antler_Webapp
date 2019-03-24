@@ -101,7 +101,7 @@ export default {
   methods: {
     async loadItems() {
       var response;
-      response = await axios.get(this.$HostName + "/list/DEVICE?token=" + this.$AdminToken);
+      response = await axios.get(this.$HostName + "/list/DEVICE?status=1&token=" + this.$AdminToken);
       this.deviceArray = response.data;
 
       response = await axios.get(this.$HostName + "/list/ADS?token=" + this.$AdminToken);
@@ -147,6 +147,14 @@ export default {
 
   async created() {
     this.loadItems();
+    var socket = require("../../socket/websocket.js").socket;
+
+    socket.on("device-disconnected",(message)=>{
+        this.loadItems();
+    })
+    socket.on("new-connection",(message)=>{
+        this.loadItems();
+    })
   }
 }
 </script>

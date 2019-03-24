@@ -19,10 +19,11 @@
 
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import cTable from "@/components/Table.vue";
+
+
 
 export default {
   name: "Devies",
@@ -101,6 +102,14 @@ export default {
 
   async created() {
     this.loadItems();
+    var socket = require("../../socket/websocket.js").socket;
+
+  socket.on("device-disconnected",(message)=>{
+        this.loadItems();
+    })
+    socket.on("new-connection",(message)=>{
+        this.loadItems();
+    })
   }
 };
 </script>
