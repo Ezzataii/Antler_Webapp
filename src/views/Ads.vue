@@ -128,6 +128,10 @@ export default {
         user: {
           label: "Ad Company",
           sortable: true
+        },
+        duration: {
+          label: 'Duration',
+          sortable: true
         }
       }    
     };
@@ -167,6 +171,7 @@ export default {
 
 
     async onChangeDurationSubmit(e) {
+      console.log("test");
       var adIds = [];
       this.aSelected.forEach(element => {
         adIds.push(element["id"]); 
@@ -174,22 +179,19 @@ export default {
 
       var json = {
         parameters: {
-          ads: adIds,
+          images: adIds,
           duration: document.querySelector("#adDuration").value
         }
       }
       console.log(json);
-      // try {
-      //   const response = await axios({
-      //     method: "post",
-      //     url: this.$HostName + "/deploy?token=" + this.$AdminToken,
-      //     data: json,
-      //     config: { headers: {'Content-Type': 'application/json' }}
-      //   })
-      // } 
-      // catch (e) {
-      //   this.errors.push(e);
-      // }
+      var res = await axios({
+        method: "put",
+        url: this.$HostName + "/update/ads/duration?token=" + this.$AdminToken,
+        data: json,
+        config: { headers: {'Content-Type': 'application/json' }}
+      })
+
+      this.loadItems();
     },
 
 

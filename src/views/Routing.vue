@@ -89,7 +89,11 @@ export default {
           sortable: true
         },
         user: {
-          label: 'Ad Company',
+          label: 'User',
+          sortable: true
+        }, 
+        duration: {
+          label: 'Duration',
           sortable: true
         }
       }
@@ -134,7 +138,7 @@ export default {
           images: adIds
         }
       }
-      const response = await axios({
+      var res = await axios({
         method: "post",
         url: this.$HostName + "/deploy?token=" + this.$AdminToken,
         data: json,
