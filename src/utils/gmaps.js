@@ -1,5 +1,6 @@
 
 const API_KEY = `AIzaSyDWAZwfygdUINKzv8U0nr0wbQMkqXdUh6o`;
+//const API_KEY = "AIzaSyAOSThkGKPes0XVY9HloF6GYKHpnrhvauY";
 const CALLBACK_NAME = `initmap`;
 
 let initialized = !!window.google;
