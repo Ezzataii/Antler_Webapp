@@ -11,6 +11,7 @@ const Routing = () => import('@/views/Routing');
 const Devices = () => import('@/views/Devices')
 const SetupDevice = () => import("@/views/SetupDevice");
 const Ads = () => import('@/views/Ads');
+const Groups = () => import('@/views/Groups');
 const MapG = () => import('@/views/Map');
 
 
@@ -43,9 +44,13 @@ export default new Router({
           name: "Setup Device",
           component: SetupDevice
         }, {   
-          path: "Ads",
-          name: "Ads",
+          path: "Images",
+          name: "Images",
           component: Ads
+        }, {   
+          path: "Groups",
+          name: "Groups",
+          component: Groups
         }, {
           path: "Map",
           name: "Map",

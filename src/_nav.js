@@ -52,7 +52,19 @@ export default {
     {
       name: 'Ads',
       url: '/Ads',
-      icon: 'fa fa-picture-o'
+      icon: 'fa fa-picture-o',
+      children: [
+        {
+          name: 'Images',
+          url: '/Images',
+          icon: 'fa fa-picture-o'
+        },
+        {
+          name: 'Groups',
+          url: '/Groups',
+          icon: 'fa fa-picture-o'
+        }
+      ]
     },
     {
       divider: true
