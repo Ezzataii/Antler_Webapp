@@ -36,7 +36,7 @@
           <i class="icon-location-pin"></i>
         </b-nav-item>
 
-        <DefaultHeaderDropdownAccnt userName="AliLDeek"/>
+        <DefaultHeaderDropdownAccnt userName="Admin"/>
       </b-navbar-nav>
 
       

@@ -12,8 +12,7 @@
         <b-list-group-item href="#" class="list-group-item-accent-info">
           <div class="avatar float-right">
           </div>
-          <div>Skype with <strong>Megan</strong>
-          </div>
+
           <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp;&nbsp;4 - 5pm</small>
           <small class="text-muted"><i class="icon-social-skype"></i>&nbsp;&nbsp;On-line</small>
         </b-list-group-item>
@@ -26,8 +25,7 @@
         
 
 
-        <b-list-group-item href="#" class="list-group-item-accent-success list-group-item-divider">
-          <div><strong>#10 Startups.Garden</strong> Meetup</div>
+        <b-list-group-item href="#" class="list-group-item-accent-success list-group-item-divider">>
           <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 1 - 3pm</small>
           <small class="text-muted"><i class="icon-location-pin"></i>&nbsp; Palo Alto, CA</small>
         </b-list-group-item>
