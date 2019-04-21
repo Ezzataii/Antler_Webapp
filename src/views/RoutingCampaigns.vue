@@ -3,15 +3,15 @@
     <!-- :table-data vs :data -->
     <b-row>
       <b-col lg="6" sm="12">
-        <c-table :table-data="deviceArray" :fields="devicefields" :per-page=10 
+        <c-table :table-data="deviceArray" :fields="deviceFields" :per-page="10" 
         hover striped bordered small fixed caption="Displays" fa="fa fa-television"
         v-on:selected="updatedDS($event)" v-on:refresh="loadItems()"></c-table>
       </b-col>
 
-      <b-col lg="6" sm="12">
-        <c-table :table-data="adArray" :fields="Adfields" :per-page=10 
-        hover striped bordered small fixed caption="Ads" fa="fa fa-picture-o"
-        v-on:selected="updatedAS($event)" v-on:refresh="loadItems()"></c-table>
+      <b-col lg="6">
+        <c-table :table-data="campaignArray" :fields="campaignFields" :per-page="10"
+        hover striped bordered small fixed caption="Campaigns" fa="fa fa-picture-o"
+        v-on:selected="updatedCS($event)" v-on:refresh="loadItems()"></c-table>
       </b-col>
     </b-row> 
 
@@ -19,7 +19,25 @@
       <div slot="header">
         <strong>Control</strong>
       </div>
-      <b-button size="lg" variant="outline-primary" block @click="deploy">Deploy</b-button>
+      <b-row>
+        <b-col sm="10">
+          <b-button size="md" variant="outline-primary" block @click="deploy">Deploy</b-button>
+        </b-col>
+        <b-col sm="2">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="writeModeRadio" id="overwriteRadio" value="o" checked>
+            <label class="form-check-label" for="overwriteRadio">
+              Overwrite
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="writeModeRadio" id="appendRadio" value="a">
+            <label class="form-check-label" for="appendRadio">
+              Append
+            </label>
+          </div>
+        </b-col>
+      </b-row>   
     </b-card>
 
     
@@ -39,7 +57,7 @@ import cTable from '@/components/Table.vue'
 
 
 export default {
-  name: 'Routing',
+  name: 'RoutingCampaigns',
   components: {cTable},
   props: {
 
@@ -48,12 +66,12 @@ export default {
   data: () => {
     return {
       deviceArray: [],
-      adArray: [],
+      campaignArray: [],
 
       dSelected: [],
-      aSelected: [],
+      cSelected: [],
 
-      devicefields: {
+      deviceFields: {
         id: {
           label: 'Device ID',
           sortable: true
@@ -79,28 +97,26 @@ export default {
           sortable: true
         }
       }, 
-      Adfields: {
+      campaignFields: {
         id: {
-          label: 'Ad ID',
+          label: 'CampaignID',
           sortable: true
         },
         name: {
-          label: 'Ad Name',
-          sortable: true
-        },
-        user: {
-          label: 'User',
-          sortable: true
-        }, 
-        duration: {
-          label: 'Duration',
+          label: 'Campaign Name',
           sortable: true
         }
       }
     }
   },
 
-
+ mounted() {
+    let jqueryScript = document.createElement('script');
+    jqueryScript.setAttribute('src', 'https://code.jquery.com/jquery-3.4.0.min.js');
+    jqueryScript.setAttribute('integrity', 'sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=');
+    jqueryScript.setAttribute('crossorigin', 'anonymous');
+    document.head.appendChild(jqueryScript);
+  },
 
   methods: {
     async loadItems() {
@@ -108,39 +124,40 @@ export default {
       response = await axios.get(this.$HostName + "/list/DEVICE?status=1&token=" + this.$AdminToken);
       this.deviceArray = response.data;
 
-      response = await axios.get(this.$HostName + "/list/ADS?token=" + this.$AdminToken);
-      this.adArray = response.data;
+      response = await axios.get(this.$HostName + "/get/groups?userid=45&token=" + this.$AdminToken);
+      this.campaignArray = response.data;
 
     },
 
     updatedDS(dNew) {
       this.dSelected = dNew;
     },
-    updatedAS(aNew) {
-      this.aSelected = aNew;
+    updatedCS(cNew) {
+      this.cSelected = cNew;
     },
     async deploy() {
-
 
       var deviceIds = [];
       this.dSelected.forEach(element => {
         deviceIds.push(element["id"]); 
       });
 
-      var adIds = [];
-      this.aSelected.forEach(element => {
-        adIds.push(element["id"]); 
+      var campaignIds = [];
+      this.cSelected.forEach(element => {
+        campaignIds.push(element["groupid"]); 
       });
 
       var json = {
         parameters: {
           devices: deviceIds,
-          images: adIds
+          groups: campaignIds,
+          writeMode: $('input[name=writeModeRadio]:checked').val()
         }
       }
+      console.log(json);
       var res = await axios({
         method: "post",
-        url: this.$HostName + "/deploy?token=" + this.$AdminToken,
+        url: this.$HostName + "/deploy/groups?token=" + this.$AdminToken,
         data: json,
         config: { headers: {'Content-Type': 'application/json' }}
       })

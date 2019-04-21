@@ -3,9 +3,9 @@
     <!-- Table -->
     <b-row>
       <b-col lg="12">
-        <c-table :table-data="adArray" :fields="Adfields" :per-page="10"
-        hover striped bordered small fixed caption="Ads" fa="fa fa-picture-o"
-        v-on:selected="updatedAS($event)" v-on:refresh="loadItems()"></c-table>
+        <c-table :table-data="graphArray" :fields="graphfields" :per-page="10"
+        hover striped bordered small fixed caption="Graphs" fa="fa fa-picture-o"
+        v-on:selected="updatedGS($event)" v-on:refresh="loadItems()"></c-table>
       </b-col>
     </b-row>
    
@@ -14,7 +14,7 @@
       <b-col lg="6" sm="6">
         <b-card no-body v-if="show">
           <div slot="header">
-            <i class="fa fa-clock-o"></i> Change Selected Ads' Duration
+            <i class="fa fa-clock-o"></i> Change Selected Graphs' Duration
             <div class="card-header-actions">
               <b-link class="card-header-action btn-minimize" v-b-toggle.collapse2>
                 <i class="icon-arrow-up"></i>
@@ -26,8 +26,8 @@
             <b-card-body>
               <b-form @submit="onChangeDurationSubmit" @reset="onReset" v-if="show">
 
-                <b-form-group label="Enter Ads' Duration" label-for="adsDuration" :label-cols="3" :horizontal="true">
-                  <b-form-input id="adDuration" type="number" autocomplete="name"></b-form-input>
+                <b-form-group label="Enter Graphs' Duration" label-for="graphsDuration" :label-cols="3" :horizontal="true">
+                  <b-form-input id="graphDuration" type="number" autocomplete="name"></b-form-input>
                 </b-form-group>
                 
                 <div slot="footer">
@@ -48,12 +48,12 @@
 
 
 
-     <!-- Upload Image -->
+     <!-- Upload Graph -->
     
       <b-col lg="6" sm="6">
         <b-card no-body v-if="show">
           <div slot="header">
-            <i class="fa fa-upload"></i> Upload Ad
+            <i class="fa fa-upload"></i> Upload Graph
             <div class="card-header-actions">
               <b-link class="card-header-action btn-minimize" v-b-toggle.collapse1>
                 <i class="icon-arrow-up"></i>
@@ -63,12 +63,8 @@
 
           <b-collapse visible id="collapse1">
             <b-card-body>
-              <b-form @submit="onUploadAdSubmit" @reset="onReset" v-if="show">
-                <!-- AD NAME -->
-                <!-- <b-form-group label="Enter Ad Name" label-for="adName" :label-cols="3" :horizontal="true">
-                <b-form-input id="adName" type="text" autocomplete="name"></b-form-input>
-                </b-form-group>-->
-                <b-form-group label="File input" label-for="fileInput" :label-cols="3" :horizontal="true">
+              <b-form @submit="onUploadGraphSubmit" @reset="onReset" v-if="show">
+                <b-form-group label="File input (CSV)" label-for="fileInput" :label-cols="3" :horizontal="true">
                   <b-form-file id="fileInput" :plain="true"></b-form-file>
                 </b-form-group>
 
@@ -93,7 +89,7 @@
       <div slot="header">
         <strong>Control</strong>
       </div>
-      <b-button size="lg" variant="outline-danger" block @click="deleteAds">Delete Ads</b-button>
+      <b-button size="lg" variant="outline-danger" block @click="deleteGraphs">Delete Graphs</b-button>
     </b-card>
 
 
@@ -105,28 +101,28 @@ import axios from "axios";
 import cTable from "@/components/Table.vue";
 
 export default {
-  name: "Ads",
+  name: "Graph",
   components: { cTable },
   props: {},
 
   data() {
     return {
-      aSelected: [], 
+      gSelected: [], 
       show: true,
 
-      adArray: [],
+      graphArray: [],
 
-      Adfields: {
+      graphfields: {
         id: {
-          label: "Ad ID",
+          label: "Graph ID",
           sortable: true
         },
         name: {
-          label: "Ad Name",
+          label: "Graph Name",
           sortable: true
         },
         user: {
-          label: "Ad Company",
+          label: "Graph Company",
           sortable: true
         },
         duration: {
@@ -137,24 +133,24 @@ export default {
     };
   },
   methods: {
-    updatedAS(aNew) {
-      this.aSelected = aNew;
+    updatedGS(aNew) {
+      this.gSelected = aNew;
     },
 
     async loadItems() {
-      const response = await axios.get(this.$HostName + "/list/ADS?token=" + this.$AdminToken);
-      this.adArray = response.data;
+      const response = await axios.get(this.$HostName + "/list/GRAPHS?token=" + this.$AdminToken);
+      this.graphArray = response.data;
     },
 
 
     
-    async onUploadAdSubmit(e) {
+    async onUploadGraphSubmit(e) {
       e.preventDefault();
-      var url = this.$HostName + "/upload/ad?user=45&token=" + this.$AdminToken;
+      var url = this.$HostName + "/upload/csv?user=45&token=" + this.$AdminToken;
 
       var formData = new FormData();
       var imagefile = document.querySelector('#fileInput');
-      formData.append("filetoupload", imagefile.files[0]);
+      formData.append("csvfile", imagefile.files[0]);
       var res = await axios.post(url, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -171,22 +167,21 @@ export default {
 
 
     async onChangeDurationSubmit(e) {
-      console.log("test");
-      var adIds = [];
-      this.aSelected.forEach(element => {
-        adIds.push(element["id"]); 
+      var graphIds = [];
+      this.gSelected.forEach(element => {
+        graphIds.push(element["id"]); 
       });
 
       var json = {
         parameters: {
-          ads: adIds,
-          duration: document.querySelector("#adDuration").value
+          graphs: graphIds,
+          duration: document.querySelector("#graphDuration").value
         }
       }
       console.log(json);
       var res = await axios({
         method: "put",
-        url: this.$HostName + "/update/ads/duration?token=" + this.$AdminToken,
+        url: this.$HostName + "/update/graphs/duration?token=" + this.$AdminToken,
         data: json,
         config: { headers: {'Content-Type': 'application/json' }}
       })
@@ -195,21 +190,21 @@ export default {
     },
 
 
-    async deleteAds() {
-      var adIds = [];
-      this.aSelected.forEach(element => {
-        adIds.push(element["id"]); 
+    async deleteGraphs() {
+      var graphIds = [];
+      this.gSelected.forEach(element => {
+        graphIds.push(element["id"]); 
       });
 
       var json = {
         parameters: {
-          ads: adIds
+          graphs: graphIds
         }
       }
 
       const res = await axios({
         method: "post",
-        url: this.$HostName + "/delete/AD?token=" + this.$AdminToken,
+        url: this.$HostName + "/delete/GRAPH?token=" + this.$AdminToken,
         data: json,
         config: { headers: {'Content-Type': 'application/json' }}
       })

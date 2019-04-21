@@ -34,10 +34,10 @@
   "devDependencies": {
     "@coreui/icons": "^0.3.0",
     "@vue/cli-plugin-babel": "^3.3.0",
-    "@vue/cli-plugin-e2e-nightwatch": "^3.3.0",
+    "@vue/cli-plugin-e2e-nightwatch": "^3.6.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
-    "@vue/cli-plugin-unit-jest": "^3.3.0",
-    "@vue/cli-service": "^3.3.0",
+    "@vue/cli-plugin-unit-jest": "^3.6.3",
+    "@vue/cli-service": "^3.6.0",
     "@vue/test-utils": "^1.0.0-beta.28",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",

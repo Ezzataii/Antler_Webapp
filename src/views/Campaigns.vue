@@ -1,50 +1,41 @@
 <template>
   <div class="animated fadeIn">
-    <!-- Table -->
+    <b-card no-body>
+      <b-row>
+        <b-col lg="6">
+          <c-table :table-data="groupArray" :fields="GroupFields" :per-page="10"
+          hover striped bordered small fixed caption="Campaigns" fa="fa fa-picture-o"
+          v-on:selected="updatedGS($event)" v-on:refresh="loadItems()"></c-table>
+          <b-button size="lg" variant="primary" block @click="getAdsInGroup">Show Ads</b-button>  
+        </b-col>
+
+        <b-col lg="6">
+          <c-table :table-data="adGroupArray" :fields="Adfields" :per-page="10"
+          hover striped bordered small fixed caption="Ads in Campaign" fa="fa fa-picture-o"
+          v-on:refresh="loadItems()"></c-table>
+        </b-col>
+      </b-row>
+    </b-card> 
+
     <b-row>
       <b-col lg="12">
-      <b-card no-body v-if="show">
-        <div slot="header">     
-          <div class="card-header-actions">
-            <b-link class="card-header-action btn-minimize" v-b-toggle.collapse3>
-              <i class="icon-arrow-up"></i>
-            </b-link>
-          </div>
-        </div>
-
+      <b-card>
           <b-collapse visible id="collapse3">   
             <c-table :table-data="adArray" :fields="Adfields" :per-page="10"
             hover striped bordered small fixed caption="Ads" fa="fa fa-picture-o"
             v-on:selected="updatedAS($event)" v-on:refresh="loadItems()"></c-table>    
           </b-collapse>
 
-          <b-form-group label="Enter Group Name" label-for="adsDuration" :label-cols="1" :horizontal="true">
-            <b-form-input id="groupNameInput" type="text" autocomplete="name"></b-form-input>
-          </b-form-group>
-        
-          <b-button size="lg" variant="primary" block @click="putAdsInGroup">Add to Group</b-button>
+          <b-container-fluid>
+            <b-form-group label="Enter Campaign Name" label-for="adsDuration" :label-cols="1" :horizontal="true">
+              <b-form-input id="groupNameInput" type="text" autocomplete="name"></b-form-input>
+            </b-form-group>
+            <b-button size="lg" variant="primary" block @click="putAdsInGroup">Add to Campaign</b-button>
+          </b-container-fluid>       
         </b-card>
       </b-col>
     </b-row>
 
-
-
-    <b-row>
-      <b-col lg="6">
-        <b-card>
-          <c-table :table-data="groupArray" :fields="GroupFields" :per-page="10"
-          hover striped bordered small fixed caption="Groups" fa="fa fa-picture-o"
-          v-on:selected="updatedGS($event)" v-on:refresh="loadItems()"></c-table>
-          <b-button size="lg" variant="primary" block @click="getAdsInGroup">Show Ads</b-button>
-        </b-card>   
-      </b-col>
-
-      <b-col lg="6">
-        <c-table :table-data="adGroupArray" :fields="Adfields" :per-page="10"
-        hover striped bordered small fixed caption="Ads in Group" fa="fa fa-picture-o"
-        v-on:refresh="loadItems()"></c-table>
-      </b-col>
-    </b-row>
   </div>
 </template>
 
@@ -53,7 +44,7 @@ import axios from "axios";
 import cTable from "@/components/Table.vue";
 
 export default {
-  name: "Ads",
+  name: "Campaigns",
   components: { cTable },
   props: {},
 

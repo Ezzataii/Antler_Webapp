@@ -7,11 +7,14 @@ const DefaultContainer = () => import('@/container/DefaultContainer')
 
 // Views
 const Home = () => import('@/views/Home');
-const Routing = () => import('@/views/Routing');
+const RoutingImages = () => import('@/views/RoutingImages');
+const RoutingCampaigns = () => import('@/views/RoutingCampaigns');
+const RoutingGraphs = () => import('@/views/RoutingGraphs');
 const Devices = () => import('@/views/Devices')
 const SetupDevice = () => import("@/views/SetupDevice");
 const Ads = () => import('@/views/Ads');
-const Groups = () => import('@/views/Groups');
+const Graphs = () => import('@/views/Graphs');
+const Campaigns = () => import('@/views/Campaigns');
 const MapG = () => import('@/views/Map');
 
 
@@ -32,31 +35,43 @@ export default new Router({
           name: "",
           component: Home
         }, {
-          path: "Routing",
-          name: "Routing",
-          component: Routing
+          path: "routing/ads",
+          name: "Routing Ads",
+          component: RoutingImages
         }, {
-          path: "Devices",
+          path: "routing/campaigns",
+          name: "Routing Campaigns",
+          component: RoutingCampaigns
+        }, {
+          path: "routing/graphs",
+          name: "Routing Graphs",
+          component: RoutingGraphs
+        }, {
+          path: "devices",
           name: "Devices",
           component: Devices
         }, {
-          path: "SetupDevice",
+          path: "setup-device",
           name: "Setup Device",
           component: SetupDevice
         }, {   
-          path: "Images",
+          path: "images",
           name: "Images",
           component: Ads
         }, {   
-          path: "Groups",
-          name: "Groups",
-          component: Groups
+          path: "graphs",
+          name: "Graphs",
+          component: Graphs
+        }, {   
+          path: "campaigns",
+          name: "Campaigns",
+          component: Campaigns
         }, {
-          path: "Map",
+          path: "map",
           name: "Map",
           component: MapG
         }, {
-          path: "About",
+          path: "about",
           name: "About Us",
           component: Home
         }

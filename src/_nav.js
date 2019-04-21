@@ -5,8 +5,29 @@ export default {
       url: '/dashboard',
       icon: 'icon-speedometer',
       badge: { variant: 'primary' }
+    },  
+    {
+      name: 'Routing',
+      url: '/Routing',
+      icon: 'fa fa-plug',
+      children: [ 
+        {
+          name: 'Routing Ads',
+          url: '/routing/ads',
+          icon: 'fa fa-plug',
+        },
+        {
+          name: 'Routing Campaigns',
+          url: '/routing/campaigns',
+          icon: 'fa fa-plug',
+        },
+        {
+          name: 'Routing Graphs',
+          url: '/routing/graphs',
+          icon: 'fa fa-plug',
+        }
+      ]
     },
-
     {
       title: true,
       name: 'Displays & Ads',
@@ -17,23 +38,18 @@ export default {
       }
     },
     {
-      name: 'Routing',
-      url: '/Routing',
-      icon: 'fa fa-plug'
-    },
-    {
       name: 'Displays',
       url: '/base',
       icon: 'fa fa-television',
       children: [
         {
           name: 'Setup Device',
-          url: '/SetupDevice',
+          url: '/setup-device',
           icon: 'fa fa-cog'
         }, 
         {
           name: 'Devices',
-          url: '/Devices',
+          url: '/devices',
           icon: 'fa fa-television'
         },
         {
@@ -45,8 +61,7 @@ export default {
           name: 'Sites',
           url: '/base/Sites',
           icon: 'fa fa-map-marker'
-        },
-       
+        }
       ]
     },
     {
@@ -56,15 +71,20 @@ export default {
       children: [
         {
           name: 'Images',
-          url: '/Images',
+          url: '/images',
           icon: 'fa fa-picture-o'
         },
         {
-          name: 'Groups',
-          url: '/Groups',
+          name: 'Campaigns',
+          url: '/campaigns',
           icon: 'fa fa-picture-o'
         }
       ]
+    },
+    {
+      name: 'Graphs',
+      url: '/graphs',
+      icon: 'fa fa-area-chart'
     },
     {
       divider: true
