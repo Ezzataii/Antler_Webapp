@@ -5,7 +5,7 @@ import Router from "vue-router";
 const Login = () => import("@/pages/Login");
 const Register = () => import("@/pages/Register");
 const Page404 = () => import("@/pages/Page404");
-const Page500 = () => import("@/pages/Page500");
+// const Page404 = () => import("@/pages/Page404");
 // Containers
 const DefaultContainer = () => import("@/container/DefaultContainer");
 
@@ -119,7 +119,7 @@ let router = new Router({
         {
           name: 'Sites',
           path: '/base/Sites',
-          component:Page500
+          component:Page404
         },
         {
           name: 'Alerts',
