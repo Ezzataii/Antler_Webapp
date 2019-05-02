@@ -123,11 +123,10 @@ export default {
     },
     {
       name: 'About Us',
-      url: '#',
+      url: '/about',
       icon: 'fa fa-info',
       class: 'mt-auto',
-      variant: 'success',
-      attributes: { target: '_blank', rel: 'noopener' }
+      variant: 'success'
     }
   ]
 }

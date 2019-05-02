@@ -36,7 +36,7 @@
                   <b-form-input type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password" />
                 </b-input-group>
 
-                <b-button variant="success" block>Create Account</b-button>
+                <b-button variant="success" block to='/login'>Create Account</b-button>
               </b-form>
             </b-card-body>
             <b-card-footer class="p-4">

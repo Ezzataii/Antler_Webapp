@@ -20,7 +20,7 @@
       <b-navbar-nav class="d-md-down-none">
         <b-nav-item class="px-3" to="/dashboard">Dashboard</b-nav-item>
         <b-nav-item class="px-3" to="/users" exact>Users</b-nav-item>
-        <b-nav-item class="px-3">Settings</b-nav-item>
+        <b-nav-item class="px-3" to="/settings" exact>Settings</b-nav-item>
       </b-navbar-nav>
 
 

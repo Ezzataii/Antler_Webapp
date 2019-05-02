@@ -24,14 +24,15 @@
           <h4>PSA Duration</h4>
           <b-form-input id="psaNumber" type="number"></b-form-input>
         </b-col>
+        
 
       </b-row>
       
       <br>
-
       <b-row>
         <b-col sm="10">
           <b-button size="md" variant="outline-primary" block @click="deploy">Deploy</b-button>
+          <b-progress :max="100" :value="loaded" show-progress animated></b-progress>
         </b-col>
 
         <b-col sm="2">
@@ -61,14 +62,18 @@
 <script>
 import axios from "axios";
 import cTable from "@/components/Table.vue";
+import { loadProgress } from 'axios-progress-bar';
+import { setTimeout } from 'timers';
 
 export default {
   name: "Devies",
   components: { cTable },
   props: {},
-
+  
   data() {
+    
     return {
+      loaded: 0.0,
       dSelected: [], 
       show: true,
        deviceArray: [],
@@ -113,7 +118,9 @@ export default {
     updatedDS(dNew) {
       this.dSelected = dNew;
     },
-
+    updateLoaded(loaded,total) {
+      this.loaded = (loaded/total) * 100;
+    },
      async deploy() {
 
       var deviceIds = [];
@@ -133,8 +140,19 @@ export default {
       var res = await axios({
         method: "post",
         url: this.$HostName + "/deploy/psa?token=" + this.$AdminToken,
-        data: formData
-      })
+        data: formData,
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.lengthComputable) {
+            console.log(progressEvent.loaded + ' ' + progressEvent.total);
+            this.updateLoaded(progressEvent.loaded,progressEvent.total);
+          }
+          if (progressEvent.loaded == progressEvent.total) {
+           setTimeout(() => {
+             this.updateLoaded(0,progressEvent.total);
+           }, 2000); 
+          }
+        }
+      });
     }
 
   },

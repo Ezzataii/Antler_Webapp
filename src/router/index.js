@@ -115,7 +115,7 @@ let router = new Router({
         {
           path: "/about",
           name: "About Us",
-          component: Home
+          component: Page404
         },
         {
           name: 'Hosts',
@@ -126,6 +126,21 @@ let router = new Router({
           name: 'Sites',
           path: '/base/Sites',
           component:Page404
+        },
+        {
+          name: 'Dashboard',
+          path: '/dashboard',
+          component: Page404
+        },
+        {
+          name: 'Users',
+          path: '/users',
+          component: Page404
+        },
+        {
+          name: 'Settings',
+          path: '/settings',
+          component: Page404
         }
       ]
     }

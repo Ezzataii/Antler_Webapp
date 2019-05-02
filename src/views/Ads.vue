@@ -80,6 +80,7 @@
                   <b-button type="reset" size="sm" variant="danger">
                     <i class="fa fa-ban"></i> Reset
                   </b-button>
+                  <b-progress :max="100" :value="loaded" show-progress animated></b-progress>
                 </div>
               </b-form>
             </b-card-body>
@@ -111,6 +112,7 @@ export default {
 
   data() {
     return {
+      loaded: 0.0,
       aSelected: [], 
       show: true,
 
@@ -140,7 +142,9 @@ export default {
     updatedAS(aNew) {
       this.aSelected = aNew;
     },
-
+    updateLoaded(loaded,total) {
+      this.loaded = (loaded/total) * 100;
+    },
     async loadItems() {
       const response = await axios.get(this.$HostName + "/list/ADS?token=" + this.$AdminToken);
       this.adArray = response.data;
@@ -158,6 +162,17 @@ export default {
       var res = await axios.post(url, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.lengthComputable) {
+            console.log(progressEvent.loaded + ' ' + progressEvent.total);
+            this.updateLoaded(progressEvent.loaded,progressEvent.total);
+          }
+          if (progressEvent.loaded == progressEvent.total) {
+           setTimeout(() => {
+             this.updateLoaded(0,progressEvent.total);
+           }, 2000); 
+          }
         }
       })
 

@@ -19,7 +19,7 @@
       </b-dropdown-item>
 
       <b-dropdown-divider />
-      <b-dropdown-item><i class="fa fa-lock" /> Logout </b-dropdown-item>
+      <b-dropdown-item @click="$router.push({name: 'login'})"><i class="fa fa-lock" /> Logout </b-dropdown-item>
     </template>
   </AppHeaderDropdown>
 </template>
