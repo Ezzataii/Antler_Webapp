@@ -7,6 +7,15 @@ export default {
       badge: { variant: 'primary' }
     },  
     {
+      title: true,
+      name: 'Routing',
+      class: '',
+      wrapper: {
+        element: '',
+        attributes: {}
+      }
+    },
+    {
       name: 'Routing',
       url: '/Routing',
       icon: 'fa fa-plug',
@@ -30,7 +39,7 @@ export default {
     },
     {
       title: true,
-      name: 'Displays & Ads',
+      name: 'Displays',
       class: '',
       wrapper: {
         element: '',
@@ -65,6 +74,15 @@ export default {
       ]
     },
     {
+      title: true,
+      name: 'Media',
+      class: '',
+      wrapper: {
+        element: '',
+        attributes: {}
+      }
+    },
+    {
       name: 'Ads',
       url: '/Ads',
       icon: 'fa fa-picture-o',
@@ -91,34 +109,17 @@ export default {
     },
     {
       title: true,
-      name: 'Other'
+      name: 'Others'
+    },
+    {
+      name: 'PSA',
+      url: '/psa',
+      icon: 'fa fa-warning'
     },
     {
       name: 'Map',
       url: '/map',
       icon: 'fa fa-map',
-    },
-    {
-      name: 'Notifications',
-      url: '/notifications',
-      icon: 'icon-bell',
-      children: [
-        {
-          name: 'Alerts',
-          url: '/notifications/alerts',
-          icon: 'icon-bell'
-        },
-        {
-          name: 'Badges',
-          url: '/notifications/badges',
-          icon: 'icon-bell'
-        },
-        {
-          name: 'Modals',
-          url: '/notifications/modals',
-          icon: 'icon-bell'
-        }
-      ]
     },
     {
       name: 'About Us',

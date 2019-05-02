@@ -84,14 +84,6 @@ export default {
         site: {
           label: 'Site',
           sortable: true
-        },
-        auth: {
-          label: 'Authentication Status',
-          sortable: true
-        }, 
-        status: {
-          label: 'Status',
-          sortable: true
         }
       }, 
       adFields: {

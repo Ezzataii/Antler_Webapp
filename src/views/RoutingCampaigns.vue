@@ -87,14 +87,6 @@ export default {
         site: {
           label: 'Site',
           sortable: true
-        },
-        auth: {
-          label: 'Authentication Status',
-          sortable: true
-        }, 
-        status: {
-          label: 'Status',
-          sortable: true
         }
       }, 
       campaignFields: {
@@ -110,7 +102,7 @@ export default {
     }
   },
 
- mounted() {
+  mounted() {
     let jqueryScript = document.createElement('script');
     jqueryScript.setAttribute('src', 'https://code.jquery.com/jquery-3.4.0.min.js');
     jqueryScript.setAttribute('integrity', 'sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=');

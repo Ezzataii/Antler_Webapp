@@ -5,7 +5,7 @@ import Router from "vue-router";
 const Login = () => import("@/pages/Login");
 const Register = () => import("@/pages/Register");
 const Page404 = () => import("@/pages/Page404");
-// const Page404 = () => import("@/pages/Page404");
+
 // Containers
 const DefaultContainer = () => import("@/container/DefaultContainer");
 
@@ -20,6 +20,7 @@ const Ads = () => import("@/views/Ads");
 const Graphs = () => import("@/views/Graphs");
 const Campaigns = () => import("@/views/Campaigns");
 const MapG = () => import("@/views/Map");
+const PSA = () => import("@/views/PSA");
 
 Vue.use(Router);
 
@@ -107,6 +108,11 @@ let router = new Router({
           component: MapG
         },
         {
+          path: "/psa",
+          name: "PSA",
+          component: PSA
+        },
+        {
           path: "/about",
           name: "About Us",
           component: Home
@@ -119,21 +125,6 @@ let router = new Router({
         {
           name: 'Sites',
           path: '/base/Sites',
-          component:Page404
-        },
-        {
-          name: 'Alerts',
-          path: '/notifications/alerts',
-          component:Page404
-        },
-        {
-          name: 'Badges',
-          path: '/notifications/badges',
-          component:Page404
-        },
-        {
-          name: 'Modals',
-          path: '/notifications/modals',
           component:Page404
         }
       ]
